@@ -1,14 +1,9 @@
 import GenericButton from '@/components/GenericButton';
-import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
-import Image from 'next/image';
-import {
-  HomePageAttributes,
-  HomePageResponse,
-  RopeGalleryItem,
-} from '@/types/homePageTypes';
+import { HomePageAttributes, HomePageResponse } from '@/types/homePageTypes';
 import ImageContainer from '@/components/panels/ImageContainer';
-import ParagraphsList from '@/components/panels/ParagraphsList';
 import RichTextEditor from '@/components/RichTextEditor';
+import MainGrid from '@/components/layout/MainGrid';
+import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
 
 export default async function Home() {
   const response: HomePageResponse = await fetchStrapiContent(
@@ -18,35 +13,31 @@ export default async function Home() {
   const data: HomePageAttributes = response.data.attributes;
 
   return (
-    <main className='m-auto mt-8 w-[80%]'>
-      <h1 className='text-center text-3xl leading-9 lg:py-8 lg:text-6xl'>
+    <MainGrid className=''>
+      <h1 className='col-span-full mt-10 px-6 text-center text-3xl leading-9 lg:py-8 lg:text-6xl'>
         {data.headerText}...
       </h1>
-      <div
-        className='m-auto mt-8 flex flex-col items-center justify-center gap-4 lg:mt-0 lg:max-w-[1100px] lg:flex-row-reverse
-        lg:justify-around lg:gap-10 xl:mt-12 xl:max-w-[1250px]'
-      >
+      <div className='col-span-2 m-auto mt-2 grid grid-cols-2 items-center justify-center gap-2'>
         {data.images.data.map((image) => {
           return (
             <ImageContainer
               key={image.id}
               image={image}
-              widthOffset={300}
-              heightOffset={300}
+              widthOffset={325}
+              heightOffset={325}
             />
           );
         })}
-
-        <div className='flex flex-col items-center justify-around lg:mt-0 lg:text-lg xl:text-xl '>
-          <RichTextEditor editorContent={data.heroText} />
-          <p className='text-center font-light italic'>{data.tagLine}</p>
-          <div className='my-10 flex items-center justify-center gap-4'>
-            <GenericButton className='bg-rainbow-700 min-w-[100px] rounded-full font-semibold italic'>
-              {data.CTAButtonText}
-            </GenericButton>
-          </div>
+      </div>
+      <div className='col-span-2 mt-10 flex flex-col items-center justify-around px-6 lg:mt-0 lg:text-lg xl:text-xl '>
+        <RichTextEditor editorContent={data.heroText} />
+        <p className='mt-6 text-center font-semibold'>{data.tagLine}</p>
+        <div className='my-10 flex items-center justify-center gap-4'>
+          <GenericButton className='bg-rainbow-700 min-w-[100px] rounded-full font-semibold italic'>
+            {data.CTAButtonText}
+          </GenericButton>
         </div>
       </div>
-    </main>
+    </MainGrid>
   );
 }
