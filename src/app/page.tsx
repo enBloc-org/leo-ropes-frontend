@@ -12,7 +12,7 @@ import RichTextEditor from '@/components/RichTextEditor';
 
 export default async function Home() {
   const response: HomePageResponse = await fetchStrapiContent(
-    'api/home-page?api/populate[heroText]&[populate]=images'
+    'api/home-page?api/populate[heroText]&populate=images'
   );
 
   const data: HomePageAttributes = response.data.attributes;
@@ -23,22 +23,22 @@ export default async function Home() {
         {data.headerText}...
       </h1>
       <div
-        className='m-auto mt-8 flex flex-col items-center justify-center gap-4 lg:mt-0 lg:max-w-[1100px] lg:flex-row-reverse 
+        className='m-auto mt-8 flex flex-col items-center justify-center gap-4 lg:mt-0 lg:max-w-[1100px] lg:flex-row-reverse
         lg:justify-around lg:gap-10 xl:mt-12 xl:max-w-[1250px]'
       >
         {data.images.data.map((image) => {
           return (
-            <ImageContainer 
-            image={image}
-            widthOffset={300}
-            heightOffset={300}/>
-          )
+            <ImageContainer
+              key={image.id}
+              image={image}
+              widthOffset={300}
+              heightOffset={300}
+            />
+          );
         })}
-       
+
         <div className='flex flex-col items-center justify-around lg:mt-0 lg:text-lg xl:text-xl '>
-          <RichTextEditor 
-            editorContent={data.heroText}
-          />
+          <RichTextEditor editorContent={data.heroText} />
           <p className='text-center font-light italic'>{data.tagLine}</p>
           <div className='my-10 flex items-center justify-center gap-4'>
             <GenericButton className='bg-rainbow-700 min-w-[100px] rounded-full font-semibold italic'>
