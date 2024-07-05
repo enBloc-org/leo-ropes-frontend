@@ -25,14 +25,7 @@ export default async function Home() {
         md:mt-8 md:grid-cols-3 lg:col-start-2 lg:col-end-7'
       >
         {data.images.data.map((image) => {
-          return (
-            <ImageContainer
-              key={image.id}
-              image={image}
-              widthOffset={300}
-              heightOffset={300}
-            />
-          );
+          return <ImageContainer key={image.id} image={image} />;
         })}
       </div>
       <div

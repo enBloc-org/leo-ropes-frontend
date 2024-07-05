@@ -7,7 +7,8 @@ import { useState } from 'react';
 import PanelContent from './panels/PanelContent';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
 import ImageContainer from './panels/ImageContainer';
-import { ImageArrayInterface, ImageInterface } from '@/types/homePageTypes';
+import ImageGallery from './ImageGallery';
+import { ImageArrayInterface, ImageData } from '@/types/imageTypes';
 
 interface DesktopAccordionProps {
   buttonList: ButtonListType[];
@@ -41,10 +42,8 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
       {activePanel === 'types' && (
         <>
           <PanelContent panelInfo={descriptionPanel[0]} />
-          <ImageContainer
-            panelImages={descriptionPanel[0].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
+          <ImageGallery
+            images={descriptionPanel[0].images?.data as ImageData[]}
           />
         </>
       )}

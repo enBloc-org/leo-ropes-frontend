@@ -1,5 +1,5 @@
-import { ImageArrayInterface } from './homePageTypes';
 import { RichTextType } from './richTextEditorTypes';
+import { ImageArrayInterface } from './imageTypes';
 
 export interface DescriptionPanelType {
   id: number;

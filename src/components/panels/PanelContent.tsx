@@ -1,13 +1,15 @@
 'use client';
 import { DescriptionPanelType } from '@/types/infoPageTypes';
 import PanelContainer from './PanelContainer';
-import ParagraphsList from './ParagraphsList';
-import UnorderedList from './UnorderedList';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { DisplayType } from '@/types/componentTypes';
 import { Dispatch, SetStateAction } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { ListItemType, TextChildType } from '@/types/richTextEditorTypes';
+import { RichTextType } from '@/types/richTextEditorTypes';
+import RichTextEditor from '../RichTextEditor';
+import ImageContainer from '@/components/panels/ImageContainer';
+import { ImageData } from '@/types/imageTypes';
+import ImageGallery from '../ImageGallery';
 
 interface RopeTypesPanelProps {
   panelInfo: DescriptionPanelType;
@@ -48,24 +50,10 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
           </button>
         )}
         <h2 className='text-xl '>{panelInfo.h2}</h2>
-        {panelInfo.descriptionParagraph?.map((content) => {
-          switch (content.type) {
-            case 'list':
-              return (
-                <UnorderedList
-                  key={uuidv4()}
-                  listContent={content.children as ListItemType[]}
-                />
-              );
-            case 'paragraph':
-              return (
-                <ParagraphsList
-                  key={uuidv4()}
-                  paragraphContent={content.children as TextChildType[]}
-                />
-              );
-          }
-        })}
+        <RichTextEditor
+          editorContent={panelInfo.descriptionParagraph as RichTextType[]}
+        />
+        <ImageGallery images={panelInfo.images?.data as ImageData[]} />
       </PanelContainer>
     </>
   );

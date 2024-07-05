@@ -1,9 +1,8 @@
 'use client';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
 //Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
-import { useState } from 'react';
 import PanelContent from './panels/PanelContent';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
 
@@ -21,7 +20,7 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({
   return (
     <>
       {activePanel === 'buttons' && (
-        <div className='grid max-w-[70%] m-auto mt-14 gap-8'>
+        <div className='m-auto mt-14 grid max-w-[70%] gap-8'>
           {buttonList.map((button) => {
             return (
               <button
