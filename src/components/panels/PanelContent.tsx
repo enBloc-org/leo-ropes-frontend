@@ -24,6 +24,12 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
 }) => {
   const isBreakpoint = useMediaQuery(1000);
 
+  const breakPoints = {
+    sm: { offSet: 355 },
+    lg: { breakPoint: 1025, offSet: 350 },
+    xl: { breakPoint: 1440, offSet: 550 },
+  };
+
   return (
     <>
       {isBreakpoint && (
@@ -56,7 +62,10 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
           editorContent={panelInfo.descriptionParagraph as RichTextType[]}
         />
       </div>
-      <ImageGallery images={panelInfo.images?.data as ImageData[]} />
+      <ImageGallery
+        images={panelInfo.images?.data as ImageData[]}
+        breakPoints={breakPoints}
+      />
     </>
   );
 };

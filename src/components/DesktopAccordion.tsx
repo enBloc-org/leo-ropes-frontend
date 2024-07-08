@@ -7,7 +7,6 @@ import { DescriptionPanelType } from '@/types/infoPageTypes';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
 import { ImageData } from '@/types/imageTypes';
 import { RichTextType } from '@/types/richTextEditorTypes';
-import PanelContent from './panels/PanelContent';
 import PanelContainer from './panels/PanelContainer';
 import MainGrid from './layout/MainGrid';
 import RichTextEditor from './RichTextEditor';
@@ -17,6 +16,12 @@ interface DesktopAccordionProps {
   buttonList: ButtonListType[];
   descriptionPanel: DescriptionPanelType[];
 }
+
+const breakPoints = {
+  sm: { offSet: 255 },
+  lg: { breakPoint: 1025, offSet: 350 },
+  xl: { breakPoint: 1440, offSet: 550 },
+};
 
 const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
   buttonList,
@@ -56,6 +61,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
               </div>
               <ImageGallery
                 images={panel.images?.data as ImageData[]}
+                breakPoints={breakPoints}
                 className='flex-col'
               />
             </PanelContainer>
@@ -68,6 +74,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
                 <div className='flex items-center gap-12'>
                   <ImageGallery
                     images={panel.images?.data as ImageData[]}
+                    breakPoints={breakPoints}
                     className='flex-col'
                   />
                   <div className='max-w-[650px]'>

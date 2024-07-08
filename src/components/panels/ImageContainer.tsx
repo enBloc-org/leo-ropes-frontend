@@ -5,27 +5,35 @@ import { ImageData } from '@/types/imageTypes';
 
 interface ImageContainerProps {
   image: ImageData;
+  breakPoints: {
+    sm: { offSet: number };
+    lg: { breakPoint: number; offSet: number };
+    xl: { breakPoint: number; offSet: number };
+  };
 }
 
-const ImageContainer: React.FC<ImageContainerProps> = ({ image }) => {
+const ImageContainer: React.FC<ImageContainerProps> = ({
+  image,
+  breakPoints: { xl, lg, sm },
+}) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const largeScreenBreakpoint = useMediaQuery(1025);
-  const xlScreenBreakpoint = useMediaQuery(1450);
+  const largeScreenBreakpoint = useMediaQuery(lg.breakPoint);
+  const xlScreenBreakpoint = useMediaQuery(xl.breakPoint);
   const getStyle = () => {
-    if (largeScreenBreakpoint) {
+    if (xlScreenBreakpoint) {
       return {
-        height: `${image.attributes.formats.small.height - 355}px`,
-        width: `${image.attributes.formats.small.width - 355}px`,
+        height: `${image.attributes.formats.medium.height - xl.offSet}px`,
+        width: `${image.attributes.formats.medium.width - xl.offSet}px`,
       };
-    } else if (xlScreenBreakpoint) {
+    } else if (largeScreenBreakpoint) {
       return {
-        height: `${image.attributes.formats.medium.height - 600}px`,
-        width: `${image.attributes.formats.medium.width - 600}px`,
+        height: `${image.attributes.formats.medium.height - lg.offSet}px`,
+        width: `${image.attributes.formats.medium.width - lg.offSet}px`,
       };
     } else {
       return {
-        height: `${image.attributes.formats.medium.height - 550}px`,
-        width: `${image.attributes.formats.medium.width - 550}px`,
+        height: `${image.attributes.formats.small.height - sm.offSet}px`,
+        width: `${image.attributes.formats.small.width - sm.offSet}px`,
       };
     }
   };
@@ -36,7 +44,12 @@ const ImageContainer: React.FC<ImageContainerProps> = ({ image }) => {
         style={getStyle()}
       >
         <Image
-          src={apiUrl + image.attributes.formats.small.url}
+          src={
+            apiUrl +
+            (largeScreenBreakpoint
+              ? image.attributes.formats.medium.url
+              : image.attributes.formats.small.url)
+          }
           fill={true}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw'
           alt={image.attributes.alternativeText}

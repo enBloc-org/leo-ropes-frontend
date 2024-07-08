@@ -6,13 +6,26 @@ import { twMerge as tm } from 'tailwind-merge';
 interface ImageGalleryProps {
   images: ImageData[];
   className?: string;
+  breakPoints: {
+    sm: { breakPoint: number; offSet: number };
+    lg: { breakPoint: number; offSet: number };
+    xl: { breakPoint: number; offSet: number };
+  };
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images, className }) => {
+const ImageGallery: React.FC<ImageGalleryProps> = ({
+  images,
+  className,
+  breakPoints,
+}) => {
   return (
     <div className={tm('my-10 flex gap-4', className)}>
       {images.map((image: ImageData) => (
-        <ImageContainer key={uuidv4()} image={image} />
+        <ImageContainer
+          key={uuidv4()}
+          image={image}
+          breakPoints={breakPoints}
+        />
       ))}
     </div>
   );

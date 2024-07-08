@@ -10,6 +10,12 @@ export default async function Home() {
     'api/home-page?api/populate[heroText]&populate=images'
   );
 
+  const breakPoints = {
+    sm: { offSet: 300 },
+    lg: { breakPoint: 1025, offSet: 50 },
+    xl: { breakPoint: 1440, offSet: 600 },
+  };
+
   const data: HomePageAttributes = response.data.attributes;
 
   return (
@@ -25,7 +31,13 @@ export default async function Home() {
         md:mt-8 md:grid-cols-3 lg:col-start-2 lg:col-end-7'
       >
         {data.images.data.map((image) => {
-          return <ImageContainer key={image.id} image={image} />;
+          return (
+            <ImageContainer
+              key={image.id}
+              image={image}
+              breakPoints={breakPoints}
+            />
+          );
         })}
       </div>
       <div
