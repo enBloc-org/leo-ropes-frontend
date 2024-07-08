@@ -13,9 +13,9 @@ export default async function Home() {
   const data: HomePageAttributes = response.data.attributes;
 
   return (
-    <MainGrid className=''>
+    <MainGrid>
       <h1
-        className='col-span-full mt-10 px-6 text-center text-3xl leading-9
+        className='col-span-full mb-5 mt-10 px-6 text-center text-3xl leading-9
        lg:text-6xl'
       >
         {data.headerText}...
@@ -29,14 +29,14 @@ export default async function Home() {
         })}
       </div>
       <div
-        className='col-span-full mt-10 flex flex-col items-center justify-around px-6 sm:px-12
-        md:col-start-2 md:col-end-6 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:text-lg xl:text-xl '
+        className='xl:text-xl col-span-full mt-10 flex flex-col items-center justify-around px-6
+        sm:px-12 md:col-start-2 md:col-end-6 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:text-lg '
       >
         <RichTextEditor editorContent={data.heroText} />
         <p className='mt-6 text-center font-semibold'>{data.tagLine}</p>
         <div className='my-10 flex items-center justify-center gap-4'>
           <GenericButton
-            className='bg-rainbow-700 min-w-[100px] rounded-full font-semibold italic
+            className='min-w-[100px] rounded-full bg-rainbow-700 font-semibold italic
             lg:p-4 lg:text-xl'
           >
             {data.CTAButtonText}

@@ -10,7 +10,7 @@
   }
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1095px) {
   .grid-container {
     grid-template-columns: repeat(12, 1fr);
   }

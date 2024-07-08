@@ -1,7 +1,7 @@
 'use client';
 import useMediaQuery from '@/hooks/useMediaQuery';
-import { ImageData } from '@/types/homePageTypes';
 import Image from 'next/image';
+import { ImageData } from '@/types/imageTypes';
 
 interface ImageContainerProps {
   image: ImageData;
@@ -10,17 +10,17 @@ interface ImageContainerProps {
 const ImageContainer: React.FC<ImageContainerProps> = ({ image }) => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const largeScreenBreakpoint = useMediaQuery(1025);
-  const xlScreenBreakpoint = useMediaQuery(1201);
+  const xlScreenBreakpoint = useMediaQuery(1450);
   const getStyle = () => {
     if (largeScreenBreakpoint) {
       return {
-        height: `${image.attributes.formats.small.height - 325}px`,
-        width: `${image.attributes.formats.small.width - 325}px`,
+        height: `${image.attributes.formats.small.height - 355}px`,
+        width: `${image.attributes.formats.small.width - 355}px`,
       };
     } else if (xlScreenBreakpoint) {
       return {
-        height: `${image.attributes.formats.medium.height - 550}px`,
-        width: `${image.attributes.formats.medium.width - 550}px`,
+        height: `${image.attributes.formats.medium.height - 600}px`,
+        width: `${image.attributes.formats.medium.width - 600}px`,
       };
     } else {
       return {
@@ -32,7 +32,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({ image }) => {
   return (
     <>
       <div
-        className='relative rounded-lg 2xl:h-[200px] 2xl:w-[200px]'
+        className='2xl:h-[200px] 2xl:w-[200px] relative rounded-lg'
         style={getStyle()}
       >
         <Image
