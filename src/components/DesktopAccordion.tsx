@@ -46,10 +46,10 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
           return index % 2 === 0 ? (
             <PanelContainer
               key={uuidv4()}
-              className='col-start-3 col-end-11 flex-row items-center justify-center gap-4 bg-[#F2D8F5] p-20'
+              className='col-span-full flex-row items-center justify-center gap-12 p-20 lg:col-start-3 lg:col-end-11 lg:bg-[#F2D8F5]'
             >
-              <div className='p-10'>
-                <h2 className='text-xl '>{panel.h2}</h2>
+              <div className='max-w-[650px]'>
+                <h2 className='py-5 text-xl'>{panel.h2}</h2>
                 <RichTextEditor
                   editorContent={panel.descriptionParagraph as RichTextType[]}
                 />
@@ -64,17 +64,21 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
               key={uuidv4()}
               className='grid-container col-span-full bg-gray-200'
             >
-              <div className='col-start-3 col-end-11 items-center justify-center gap-4 bg-red-300 p-20'>
-                <div className='p-10'>
-                  <h2 className='text-xl '>{panel.h2}</h2>
-                  <RichTextEditor
-                    editorContent={panel.descriptionParagraph as RichTextType[]}
+              <div className='col-span-full gap-4 p-20 lg:col-start-3 lg:col-end-11'>
+                <div className='flex items-center gap-12'>
+                  <ImageGallery
+                    images={panel.images?.data as ImageData[]}
+                    className='flex-col'
                   />
+                  <div className='max-w-[650px]'>
+                    <h2 className='py-5 text-xl '>{panel.h2}</h2>
+                    <RichTextEditor
+                      editorContent={
+                        panel.descriptionParagraph as RichTextType[]
+                      }
+                    />
+                  </div>
                 </div>
-                <ImageGallery
-                  images={panel.images?.data as ImageData[]}
-                  className='flex-col'
-                />
               </div>
               ;
             </PanelContainer>
