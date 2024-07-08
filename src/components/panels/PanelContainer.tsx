@@ -1,14 +1,17 @@
 import { ReactNode } from 'react';
+import { twMerge as tm } from 'tailwind-merge';
 
 interface PanelContainerType {
   children: ReactNode;
+  className?: string;
 }
 
-const PanelContainer: React.FC<PanelContainerType> = ({ children }) => {
+const PanelContainer: React.FC<PanelContainerType> = ({
+  children,
+  className,
+}) => {
   return (
-    <section className='m-auto mt-24 flex flex-col gap-5 px-6 lg:px-12 lg:max-w-[80%] lg:mt-0'>
-      {children}
-    </section>
+    <section className={tm('flex flex-col', className)}>{children}</section>
   );
 };
 

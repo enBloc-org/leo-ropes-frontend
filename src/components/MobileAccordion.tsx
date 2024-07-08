@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { DescriptionPanelType } from '@/types/infoPageTypes';
 import PanelContent from './panels/PanelContent';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
+import PanelContainer from './panels/PanelContainer';
 
 interface MobileAccordionProps {
   buttonList: ButtonListType[];
@@ -18,7 +19,7 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({
   const [activePanel, setActivePanel] = useState<DisplayType>('buttons');
 
   return (
-    <>
+    <main className='flex-grow'>
       {activePanel === 'buttons' && (
         <div className='m-auto mt-14 grid max-w-[70%] gap-8'>
           {buttonList.map((button) => {
@@ -36,43 +37,45 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({
           })}
         </div>
       )}
-      {activePanel === 'types' && (
-        <PanelContent
-          panelInfo={descriptionPanel[0]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-      {activePanel === 'covers' && (
-        <PanelContent
-          panelInfo={descriptionPanel[1]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-      {activePanel === 'colours' && (
-        <PanelContent
-          panelInfo={descriptionPanel[2]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-      {activePanel === 'core' && (
-        <PanelContent
-          panelInfo={descriptionPanel[3]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-      {activePanel === 'lead' && (
-        <PanelContent
-          panelInfo={descriptionPanel[4]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-      {activePanel === 'safety' && (
-        <PanelContent
-          panelInfo={descriptionPanel[5]}
-          setActivePanel={setActivePanel}
-        />
-      )}
-    </>
+      <PanelContainer className='mt-20 gap-5 px-6'>
+        {activePanel === 'types' && (
+          <PanelContent
+            panelInfo={descriptionPanel[0]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+        {activePanel === 'covers' && (
+          <PanelContent
+            panelInfo={descriptionPanel[1]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+        {activePanel === 'colours' && (
+          <PanelContent
+            panelInfo={descriptionPanel[2]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+        {activePanel === 'core' && (
+          <PanelContent
+            panelInfo={descriptionPanel[3]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+        {activePanel === 'lead' && (
+          <PanelContent
+            panelInfo={descriptionPanel[4]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+        {activePanel === 'safety' && (
+          <PanelContent
+            panelInfo={descriptionPanel[5]}
+            setActivePanel={setActivePanel}
+          />
+        )}
+      </PanelContainer>
+    </main>
   );
 };
 

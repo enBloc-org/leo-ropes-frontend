@@ -12,9 +12,9 @@ const InformationPage = async () => {
   const { descriptionPanel } = response.data.attributes;
 
   return (
-    <main className='flex-grow'>
+    <>
       <AccordionContainer descriptionPanel={descriptionPanel} />
-    </main>
+    </>
   );
 };
 

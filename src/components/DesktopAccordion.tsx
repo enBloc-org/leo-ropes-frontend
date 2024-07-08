@@ -1,14 +1,17 @@
 'use client';
 import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 
 //Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
-import { useState } from 'react';
-import PanelContent from './panels/PanelContent';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
-import ImageContainer from './panels/ImageContainer';
+import { ImageData } from '@/types/imageTypes';
+import { RichTextType } from '@/types/richTextEditorTypes';
+import PanelContent from './panels/PanelContent';
+import PanelContainer from './panels/PanelContainer';
+import MainGrid from './layout/MainGrid';
+import RichTextEditor from './RichTextEditor';
 import ImageGallery from './ImageGallery';
-import { ImageArrayInterface, ImageData } from '@/types/imageTypes';
 
 interface DesktopAccordionProps {
   buttonList: ButtonListType[];
@@ -22,13 +25,13 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
   const [activePanel, setActivePanel] = useState<DisplayType>('types');
 
   return (
-    <div className='grid-template mt-24'>
-      <div className='flex flex-col items-center gap-4'>
+    <MainGrid>
+      <div className='col-span-full flex min-h-28 items-center justify-center gap-4 bg-gray-200'>
         {buttonList.map((button) => {
           return (
             <button
               key={uuidv4()}
-              className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : 'bg-gray-300'} lg:w-48 lg:text-lg`}
+              className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : ''} lg:w-48 lg:text-lg`}
               onClick={() => {
                 setActivePanel(button.display);
               }}
@@ -38,66 +41,47 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
           );
         })}
       </div>
-
-      {activePanel === 'types' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[0]} />
-          <ImageGallery
-            images={descriptionPanel[0].images?.data as ImageData[]}
-          />
-        </>
-      )}
-      {activePanel === 'covers' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[1]} />
-          <ImageContainer
-            panelImages={descriptionPanel[1].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'colours' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[2]} />
-          <ImageContainer
-            panelImages={descriptionPanel[2].images as ImageArrayInterface}
-            widthOffset={0}
-            heightOffset={0}
-          />
-        </>
-      )}
-      {activePanel === 'core' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[3]} />
-          <ImageContainer
-            panelImages={descriptionPanel[3].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'lead' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[4]} />
-          <ImageContainer
-            panelImages={descriptionPanel[4].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'safety' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[5]} />
-          <ImageContainer
-            panelImages={descriptionPanel[5].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-    </div>
+      <>
+        {descriptionPanel.map((panel, index) => {
+          return index % 2 === 0 ? (
+            <PanelContainer
+              key={uuidv4()}
+              className='col-start-3 col-end-11 flex-row items-center justify-center gap-4 bg-[#F2D8F5] p-20'
+            >
+              <div className='p-10'>
+                <h2 className='text-xl '>{panel.h2}</h2>
+                <RichTextEditor
+                  editorContent={panel.descriptionParagraph as RichTextType[]}
+                />
+              </div>
+              <ImageGallery
+                images={panel.images?.data as ImageData[]}
+                className='flex-col'
+              />
+            </PanelContainer>
+          ) : (
+            <PanelContainer
+              key={uuidv4()}
+              className='grid-container col-span-full bg-gray-200'
+            >
+              <div className='col-start-3 col-end-11 items-center justify-center gap-4 bg-red-300 p-20'>
+                <div className='p-10'>
+                  <h2 className='text-xl '>{panel.h2}</h2>
+                  <RichTextEditor
+                    editorContent={panel.descriptionParagraph as RichTextType[]}
+                  />
+                </div>
+                <ImageGallery
+                  images={panel.images?.data as ImageData[]}
+                  className='flex-col'
+                />
+              </div>
+              ;
+            </PanelContainer>
+          );
+        })}
+      </>
+    </MainGrid>
   );
 };
 
