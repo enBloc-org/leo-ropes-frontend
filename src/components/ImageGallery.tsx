@@ -7,7 +7,7 @@ interface ImageGalleryProps {
   images: ImageData[];
   className?: string;
   breakPoints: {
-    sm: { breakPoint: number; offSet: number };
+    sm: { offSet: number };
     lg: { breakPoint: number; offSet: number };
     xl: { breakPoint: number; offSet: number };
   };

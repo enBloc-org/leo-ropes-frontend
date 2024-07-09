@@ -26,7 +26,7 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({
             return (
               <button
                 key={uuidv4()}
-                className={`panel-button bg-rainbow-300`}
+                className={`panel-button bg-rainbow-300 shadow-sm`}
                 onClick={() => {
                   setActivePanel(button.display);
                 }}

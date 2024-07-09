@@ -4,8 +4,8 @@ import HamburgerMenu from './HamburgerMenu';
 const Header = () => {
   return (
     <header
-      className='bg-primary-green-400 flex items-center p-4
-     sm:pl-[10%] lg:justify-center lg:pl-0'
+      className='sticky top-0 z-20 flex items-center bg-primary-green-400
+     p-4 sm:pl-[10%] lg:justify-center lg:pl-0'
     >
       <LogoComponent />
       <HamburgerMenu />

@@ -1,8 +1,7 @@
-'use client';
+import React, { useState, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
 
-//Components
+// Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
 import { ImageData } from '@/types/imageTypes';
@@ -28,70 +27,58 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
   descriptionPanel,
 }) => {
   const [activePanel, setActivePanel] = useState<DisplayType>('types');
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    panelRefs.current = panelRefs.current.slice(0, buttonList.length);
+  }, [buttonList.length]);
+
+  const handleButtonClick = (index: number, display: DisplayType) => {
+    console.log('Scrolling to panel:', index);
+    console.log('Panel ref:', panelRefs.current[index]);
+    panelRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    setActivePanel(display);
+  };
 
   return (
     <MainGrid>
-      <div className='col-span-full flex min-h-28 items-center justify-center gap-4 bg-gray-200'>
-        {buttonList.map((button) => {
-          return (
-            <button
-              key={uuidv4()}
-              className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : ''} lg:w-48 lg:text-lg`}
-              onClick={() => {
-                setActivePanel(button.display);
-              }}
-            >
-              {button.text}
-            </button>
-          );
-        })}
+      <div className='sticky top-28 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-200'>
+        {buttonList.map((button, index) => (
+          <button
+            key={uuidv4()}
+            className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : ''} lg:w-48 lg:text-lg`}
+            onClick={() => handleButtonClick(index, button.display)}
+          >
+            {button.text}
+          </button>
+        ))}
       </div>
-      <>
-        {descriptionPanel.map((panel, index) => {
-          return index % 2 === 0 ? (
-            <PanelContainer
-              key={uuidv4()}
-              className='col-span-full flex-row items-center justify-center gap-12 p-20 lg:col-start-3 lg:col-end-11 lg:bg-[#F2D8F5]'
-            >
-              <div className='max-w-[650px]'>
-                <h2 className='py-5 text-xl'>{panel.h2}</h2>
-                <RichTextEditor
-                  editorContent={panel.descriptionParagraph as RichTextType[]}
-                />
-              </div>
-              <ImageGallery
-                images={panel.images?.data as ImageData[]}
-                breakPoints={breakPoints}
-                className='flex-col'
-              />
-            </PanelContainer>
-          ) : (
-            <PanelContainer
-              key={uuidv4()}
-              className='grid-container col-span-full bg-gray-200'
-            >
-              <div className='col-span-full gap-4 p-20 lg:col-start-3 lg:col-end-11'>
-                <div className='flex items-center gap-12'>
-                  <ImageGallery
-                    images={panel.images?.data as ImageData[]}
-                    breakPoints={breakPoints}
-                    className='flex-col'
-                  />
-                  <div className='max-w-[650px]'>
-                    <h2 className='py-5 text-xl '>{panel.h2}</h2>
-                    <RichTextEditor
-                      editorContent={
-                        panel.descriptionParagraph as RichTextType[]
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              ;
-            </PanelContainer>
-          );
-        })}
-      </>
+      {descriptionPanel.map((panel, index) => (
+        <PanelContainer
+          key={uuidv4()}
+          className={`col-span-full ${index % 2 === 0 ? 'flex-row items-center justify-center gap-12 p-20 lg:col-start-3 lg:col-end-11 lg:bg-[#F2D8F5]' : 'grid-container bg-gray-200'}`}
+          panelRef={(el) => {
+            panelRefs.current[index] = el;
+          }}
+        >
+          <div
+            className={`max-w-[650px] ${index % 2 !== 0 ? 'col-span-full gap-4 p-20 lg:col-start-3 lg:col-end-11' : ''}`}
+          >
+            <h2 className='py-5 text-xl'>{panel.h2}</h2>
+            <RichTextEditor
+              editorContent={panel.descriptionParagraph as RichTextType[]}
+            />
+          </div>
+          <ImageGallery
+            images={panel.images?.data as ImageData[]}
+            breakPoints={breakPoints}
+            className='flex-col'
+          />
+        </PanelContainer>
+      ))}
     </MainGrid>
   );
 };
