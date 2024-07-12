@@ -34,8 +34,6 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
   }, [buttonList.length]);
 
   const handleButtonClick = (index: number, display: DisplayType) => {
-    console.log('Scrolling to panel:', index);
-    console.log('Panel ref:', panelRefs.current[index]);
     panelRefs.current[index]?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -45,7 +43,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
 
   return (
     <MainGrid>
-      <div className='sticky top-28 z-20 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-200'>
+      <div className='sticky top-28 z-20 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-200 shadow-md'>
         {buttonList.map((button, index) => (
           <button
             key={uuidv4()}
@@ -56,31 +54,34 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
           </button>
         ))}
       </div>
-      <div className='relative top-28 col-span-full'>
-        {descriptionPanel.map((panel, index) => (
-          <PanelContainer
-            key={uuidv4()}
-            className={`col-span-full ${index % 2 === 0 ? 'flex-row items-center justify-center gap-12 p-20 lg:col-start-3 lg:col-end-11 lg:bg-[#F2D8F5]' : 'grid-container bg-gray-200'}`}
-            panelRef={(el) => {
-              panelRefs.current[index] = el;
-            }}
+      {descriptionPanel.map((panel, index) => (
+        <PanelContainer
+          key={uuidv4()}
+          className={`${index === 0 ? 'relative top-20 mb-12' : 'relative'}
+            ${
+              index % 2 === 0
+                ? 'col-start-3 col-end-11 flex-row items-center justify-center gap-12 bg-[#F2D8F5] p-20'
+                : 'grid-container col-span-full bg-gray-200 shadow-md'
+            }`}
+          panelRef={(el) => {
+            panelRefs.current[index] = el;
+          }}
+        >
+          <div
+            className={`max-w-[650px] ${index % 2 !== 0 ? 'col-span-full gap-4 p-20 lg:col-start-3 lg:col-end-11' : ''}`}
           >
-            <div
-              className={`max-w-[650px] ${index % 2 !== 0 ? 'col-span-full gap-4 p-20 lg:col-start-3 lg:col-end-11' : ''}`}
-            >
-              <h2 className='py-5 text-xl'>{panel.h2}</h2>
-              <RichTextEditor
-                editorContent={panel.descriptionParagraph as RichTextType[]}
-              />
-            </div>
-            <ImageGallery
-              images={panel.images?.data as ImageData[]}
-              breakPoints={breakPoints}
-              className='flex-col'
+            <h2 className='py-5 text-xl'>{panel.h2}</h2>
+            <RichTextEditor
+              editorContent={panel.descriptionParagraph as RichTextType[]}
             />
-          </PanelContainer>
-        ))}
-      </div>
+          </div>
+          <ImageGallery
+            images={panel.images?.data as ImageData[]}
+            breakPoints={breakPoints}
+            className='flex-col'
+          />
+        </PanelContainer>
+      ))}
     </MainGrid>
   );
 };

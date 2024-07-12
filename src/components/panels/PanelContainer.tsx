@@ -13,7 +13,10 @@ const PanelContainer: React.FC<PanelContainerType> = ({
   panelRef,
 }) => {
   return (
-    <section ref={panelRef} className={tm('flex flex-col', className)}>
+    <section
+      ref={panelRef}
+      className={tm('flex scroll-mt-36 flex-col', className)}
+    >
       {children}
     </section>
   );
