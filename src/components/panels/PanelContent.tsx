@@ -37,7 +37,7 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
           onClick={() => {
             if (setActivePanel) setActivePanel('buttons');
           }}
-          className='absolute top-24'
+          className='absolute top-4'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -57,7 +57,7 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
         </button>
       )}
       <div className={className}>
-        <h2 className='text-xl '>{panelInfo.h2}</h2>
+        <h2 className='mb-4 text-xl '>{panelInfo.h2}</h2>
         <RichTextEditor
           editorContent={panelInfo.descriptionParagraph as RichTextType[]}
         />
