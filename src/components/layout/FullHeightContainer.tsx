@@ -1,14 +1,19 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 
 const FullHeightContainer = ({ children }: { children: ReactNode }) => {
-  const [height, setHeight] = useState(window.innerHeight);
+  const [height, setHeight] = useState(0);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const handleResize = () => {
       setHeight(window.innerHeight);
     };
+
+    // Set initial height
+    handleResize();
 
     window.addEventListener('resize', handleResize);
 
@@ -17,11 +22,11 @@ const FullHeightContainer = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const style = {
-    height: height + 'px',
-    overflow: 'auto',
+  const style: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
+    height: height + 'px',
+    overflow: 'auto',
   };
 
   return <div style={style}>{children}</div>;

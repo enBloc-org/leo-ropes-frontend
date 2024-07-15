@@ -19,7 +19,7 @@ const MobileAccordion: React.FC<MobileAccordionProps> = ({
   const [activePanel, setActivePanel] = useState<DisplayType>('buttons');
 
   return (
-    <main className='relative top-20 flex-grow'>
+    <main className='relative top-20 flex-grow pb-10'>
       {activePanel === 'buttons' && (
         <div className='m-auto grid max-w-[70%] gap-8 pt-14'>
           {buttonList.map((button) => {
