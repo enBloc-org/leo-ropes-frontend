@@ -12,7 +12,7 @@ const LogoComponent = () => {
       <span className='text-rainbow-100'>L</span>
       <span className='text-rainbow-200'>E</span>
       <span className='text-rainbow-300'>O</span>
-      <LogoSvg width={breakPoint ? 50 : 100} currentColor='#D1D1D1' />
+      <LogoSvg width={breakPoint ? 60 : 100} currentColor='#D1D1D1' />
       <span className='text-rainbow-400'>R</span>
       <span className='text-rainbow-500'>O</span>
       <span className='text-rainbow-600'>P</span>
