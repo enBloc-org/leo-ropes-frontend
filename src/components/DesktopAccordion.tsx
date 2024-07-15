@@ -43,7 +43,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
 
   return (
     <MainGrid>
-      <div className='sticky top-28 z-20 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-100 shadow-md'>
+      <div className='sticky top-[75px] z-20 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-100 shadow-md lg:top-28'>
         {buttonList.map((button, index) => (
           <button
             key={uuidv4()}
@@ -57,7 +57,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
       {descriptionPanel.map((panel, index) => (
         <PanelContainer
           key={uuidv4()}
-          className={`${index === 0 ? 'relative top-20 mb-12' : 'relative'}
+          className={`${index === 0 ? 'relative top-16 mb-12' : 'relative'}
             ${
               index % 2 === 0
                 ? 'col-start-3 col-end-11 flex-row items-center justify-center gap-12 bg-[#F2D8F5] p-20'

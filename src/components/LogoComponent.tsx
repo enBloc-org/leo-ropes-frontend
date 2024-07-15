@@ -5,7 +5,7 @@ import LogoSvg from './icons/LogoSvg';
 import React from 'react';
 
 const LogoComponent = () => {
-  const breakPoint = useMediaQuery(1024);
+  const breakPoint = useMediaQuery(1095);
 
   return (
     <div className='flex items-center gap-2 text-2xl lg:text-6xl lg:tracking-wide'>
