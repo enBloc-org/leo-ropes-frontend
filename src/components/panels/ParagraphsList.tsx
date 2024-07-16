@@ -25,14 +25,14 @@ const ParagraphsList: React.FC<ParagraphListProps> = ({ paragraphContent }) => {
               </Link>
             );
           case 'text':
-            if (paragraph.text === '') return <br />;
+            if (paragraph.text === '') return <br className='mt-4' />;
             const words = paragraph.text.split(' ');
             return (
               <p
                 key={uuidv4()}
-                className={`font-light mt-2 ${paragraph.bold ? 'font-semibold' : ''}${paragraph.italic ? 'italic' : ''}`}
+                className={`mt-2 font-light ${paragraph.bold ? 'font-semibold' : ''}${paragraph.italic ? 'italic' : ''}`}
               >
-                <span className="ml-4">{words.shift()}</span> {words.join(' ')}
+                <span className='ml-4'>{words.shift()}</span> {words.join(' ')}
               </p>
             );
         }

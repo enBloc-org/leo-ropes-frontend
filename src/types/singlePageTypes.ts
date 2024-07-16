@@ -1,7 +1,7 @@
 import { RichTextType } from './richTextEditorTypes';
 import { ImageInterface } from './imageTypes';
 
-export interface AboutPageAttributes {
+export interface SinglePageAttributes {
   descriptionParagraph: RichTextType[];
   createdAt: string;
   updatedAt: string;
@@ -10,12 +10,12 @@ export interface AboutPageAttributes {
   image: ImageInterface;
 }
 
-export interface AboutPageData {
+export interface SinglePageData {
   id: number;
-  attributes: AboutPageAttributes;
+  attributes: SinglePageAttributes;
 }
 
-export interface AboutPageResponse {
-  data: AboutPageData;
+export interface SinglePageResponse {
+  data: SinglePageData;
   meta: object;
 }
