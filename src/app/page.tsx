@@ -42,7 +42,7 @@ export default async function Home() {
       </div>
       <div
         className='xl:text-xl col-span-full mt-10 flex flex-col items-center justify-around px-6
-        sm:px-12 md:col-start-2 md:col-end-6 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:pb-20 lg:text-lg '
+        sm:px-12 md:col-start-3 md:col-end-11 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:pb-20 lg:text-lg '
       >
         <RichTextEditor editorContent={data.heroText} />
         <p className='mt-6 text-center font-semibold'>{data.tagLine}</p>
