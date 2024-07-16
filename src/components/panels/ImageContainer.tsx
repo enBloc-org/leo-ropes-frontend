@@ -39,10 +39,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
   };
   return (
     <>
-      <div
-        className='2xl:h-[200px] 2xl:w-[200px] relative rounded-lg'
-        style={getStyle()}
-      >
+      <div className='relative rounded-lg' style={getStyle()}>
         <Image
           src={
             apiUrl +

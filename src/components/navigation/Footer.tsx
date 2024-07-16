@@ -4,7 +4,7 @@ import InstagramIcon from '../icons/InstagramIcon';
 
 const Footer = () => {
   return (
-    <footer className='relative mt-8 flex w-full flex-row-reverse bg-rainbow-200 py-4 pr-2 lg:p-2 lg:pr-10'>
+    <footer className='relative mt-16 flex w-full flex-row-reverse bg-rainbow-200 py-4 pr-2 lg:p-2 lg:pr-10'>
       <div className='flex items-center gap-2'>
         <FacebookIcon
           width={40}

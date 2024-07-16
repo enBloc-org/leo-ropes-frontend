@@ -14,10 +14,10 @@ const ParagraphsList: React.FC<ParagraphListProps> = ({ paragraphContent }) => {
           case 'link':
             return (
               <Link key={uuidv4()} href={paragraph.url || '#'}>
-                {paragraph.children?.map((link) => (
+                {paragraph.children?.map((link, index) => (
                   <span
                     key={uuidv4()}
-                    className={` text-rainbow-200  ${link.bold ? 'font-semibold' : ''} ${link.italic ? 'italic' : ''}`}
+                    className={`text-rainbow-200 ${link.bold ? 'font-semibold' : ''} ${link.italic ? 'italic' : ''} ${index === 0 ? 'ml-4' : ''}`}
                   >
                     {link.text}
                   </span>
@@ -26,12 +26,13 @@ const ParagraphsList: React.FC<ParagraphListProps> = ({ paragraphContent }) => {
             );
           case 'text':
             if (paragraph.text === '') return <br />;
+            const words = paragraph.text.split(' ');
             return (
               <p
                 key={uuidv4()}
-                className={`font-light ${paragraph.bold ? ' font-semibold' : ''}${paragraph.italic ? ' italic' : ''}`}
+                className={`font-light mt-2 ${paragraph.bold ? 'font-semibold' : ''}${paragraph.italic ? 'italic' : ''}`}
               >
-                {paragraph.text}
+                <span className="ml-4">{words.shift()}</span> {words.join(' ')}
               </p>
             );
         }
