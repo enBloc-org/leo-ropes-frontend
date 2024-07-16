@@ -10,13 +10,13 @@ const Footer = () => {
           width={40}
           height={40}
           currentColor='currentColor'
-          href='/'
+          href='https://www.facebook.com/groups/coveredropes/?locale=en_GB'
         />
         <InstagramIcon
           width={50}
           height={50}
           currentColor='currentColor'
-          href='/'
+          href='https://www.instagram.com/leo.ropes/?hl=en'
         />
       </div>
     </footer>

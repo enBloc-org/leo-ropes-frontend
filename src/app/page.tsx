@@ -1,9 +1,9 @@
-import GenericButton from '@/components/GenericButton';
 import { HomePageAttributes, HomePageResponse } from '@/types/homePageTypes';
 import ImageContainer from '@/components/panels/ImageContainer';
 import RichTextEditor from '@/components/RichTextEditor';
 import MainGrid from '@/components/layout/MainGrid';
 import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
+import Link from 'next/link';
 
 export default async function Home() {
   const response: HomePageResponse = await fetchStrapiContent(
@@ -47,12 +47,13 @@ export default async function Home() {
         <RichTextEditor editorContent={data.heroText} />
         <p className='mt-6 text-center font-semibold'>{data.tagLine}</p>
         <div className='my-10 flex items-center justify-center gap-4'>
-          <GenericButton
-            className='min-w-[100px] rounded-full bg-rainbow-700 font-semibold italic
+          <Link
+            href='/information'
+            className='min-w-[100px] rounded-full bg-rainbow-700 px-4 py-3 font-semibold italic shadow-sm
             lg:p-4 lg:text-xl'
           >
             {data.CTAButtonText}
-          </GenericButton>
+          </Link>
         </div>
       </div>
     </MainGrid>

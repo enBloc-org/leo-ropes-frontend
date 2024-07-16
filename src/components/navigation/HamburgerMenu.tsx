@@ -10,6 +10,7 @@ import FacebookIcon from '../icons/FacebookIcon';
 const links = [
   { title: 'Home', href: '/' },
   { title: 'Info', href: '/information' },
+  { title: 'Prices', href: '/prices' },
   { title: 'About', href: '/about' },
 ];
 
@@ -50,13 +51,25 @@ const HamburgerMenu = () => {
           })}
         </div>
         <div className='flex flex-col gap-10 lg:mt-10'>
-          <p>leoropes@gmail.com</p>
+          <p>infoleoropes@gmail.com</p>
           <div className='h-0.5 w-full rounded-full bg-black'></div>
           <ContactLink>send us a message</ContactLink>
           <div className='h-0.5 w-full rounded-full bg-black'></div>
           <div className='flex items-center justify-around pb-8'>
-            <InstagramIcon height={50} width={50} href='/' currentColor={''} />
-            <FacebookIcon width={40} height={40} href={'/'} currentColor={''} />
+            <InstagramIcon
+              height={50}
+              width={50}
+              href='https://www.instagram.com/leo.ropes/?hl=en'
+              currentColor={''}
+            />
+            <FacebookIcon
+              width={40}
+              height={40}
+              href={
+                'https://www.facebook.com/groups/coveredropes/?locale=en_GB'
+              }
+              currentColor={''}
+            />
           </div>
         </div>
       </div>
