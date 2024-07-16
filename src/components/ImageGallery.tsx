@@ -19,7 +19,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   breakPoints,
 }) => {
   return (
-    <div className={tm('my-10 flex gap-4', className)}>
+    <div className={tm('my-10 flex justify-center gap-1 sm:gap-4', className)}>
       {images.map((image: ImageData) => (
         <ImageContainer
           key={uuidv4()}

@@ -27,7 +27,7 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
   const breakPoints = {
     sm: { offSet: 355 },
     lg: { breakPoint: 1025, offSet: 350 },
-    xl: { breakPoint: 1440, offSet: 550 },
+    xl: { breakPoint: 1440, offSet: 575 },
   };
 
   return (
@@ -57,7 +57,7 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
         </button>
       )}
       <div className={className}>
-        <h2 className='mb-4 text-xl '>{panelInfo.h2}</h2>
+        <h2 className='mb-4 text-xl'>{panelInfo.h2}</h2>
         <RichTextEditor
           editorContent={panelInfo.descriptionParagraph as RichTextType[]}
         />
