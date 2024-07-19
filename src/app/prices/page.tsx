@@ -25,13 +25,13 @@ const AboutPage = async () => {
     <MainGrid className='relative top-20 pb-10 lg:top-[117px]'>
       <h1
         className='col-span-full mb-5 mt-10 px-6 text-3xl leading-9
-        md:col-start-2 lg:mb-0 lg:text-left lg:text-4xl'
+        md:col-start-3 lg:mb-0 lg:text-left lg:text-4xl'
       >
         {data.headerText}
       </h1>
       <div
         className='col-span-full flex flex-col px-6
-        sm:px-12 md:col-start-2 md:col-end-12 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:pb-20 lg:text-lg '
+        sm:px-12 md:col-start-4 md:col-end-10 md:px-0 lg:mt-8 lg:pb-20 lg:text-lg'
       >
         <RichTextEditor editorContent={data.descriptionParagraph} />
       </div>
