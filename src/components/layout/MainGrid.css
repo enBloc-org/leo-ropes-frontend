@@ -1,0 +1,11 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  flex-grow: 1;
+}
+
+@media (min-width: 769px) {
+  .grid-container {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}

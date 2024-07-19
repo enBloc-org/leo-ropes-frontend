@@ -10,7 +10,7 @@ type ContactLinkProps = {
 const ContactLink: React.FC<ContactLinkProps> = ({ className, children }) => {
   return (
     <Link
-      href={'mailto:leoropes@gmail.com'}
+      href={'mailto:infoleoropes@gmail.com'}
       className={tm('button bg-rainbow-600', className)}
     >
       {children}

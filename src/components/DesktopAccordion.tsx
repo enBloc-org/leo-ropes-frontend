@@ -1,104 +1,88 @@
-'use client';
+import React, { useState, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-//Components
+// Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
-import { useState } from 'react';
-import PanelContent from './panels/PanelContent';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
-import ImageContainer from './panels/ImageContainer';
-import { ImageArrayInterface, ImageInterface } from '@/types/homePageTypes';
+import { ImageData } from '@/types/imageTypes';
+import { RichTextType } from '@/types/richTextEditorTypes';
+import PanelContainer from './panels/PanelContainer';
+import MainGrid from './layout/MainGrid';
+import RichTextEditor from './RichTextEditor';
+import ImageGallery from './ImageGallery';
 
 interface DesktopAccordionProps {
   buttonList: ButtonListType[];
   descriptionPanel: DescriptionPanelType[];
 }
 
+const breakPoints = {
+  sm: { offSet: 255 },
+  lg: { breakPoint: 1025, offSet: 350 },
+  xl: { breakPoint: 1440, offSet: 550 },
+};
+
 const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
   buttonList,
   descriptionPanel,
 }) => {
   const [activePanel, setActivePanel] = useState<DisplayType>('types');
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    panelRefs.current = panelRefs.current.slice(0, buttonList.length);
+  }, [buttonList.length]);
+
+  const handleButtonClick = (index: number, display: DisplayType) => {
+    panelRefs.current[index]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    setActivePanel(display);
+  };
 
   return (
-    <div className='grid-template mt-24'>
-      <div className='flex flex-col items-center gap-4'>
-        {buttonList.map((button) => {
-          return (
-            <button
-              key={uuidv4()}
-              className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : 'bg-gray-300'} lg:w-48 lg:text-lg`}
-              onClick={() => {
-                setActivePanel(button.display);
-              }}
-            >
-              {button.text}
-            </button>
-          );
-        })}
+    <MainGrid>
+      <div className='sticky top-[75px] z-20 col-span-full flex min-h-20 items-center justify-center gap-4 bg-gray-100 shadow-md lg:top-28'>
+        {buttonList.map((button, index) => (
+          <button
+            key={uuidv4()}
+            className={`panel-button w-32 ${activePanel === button.display ? 'bg-rainbow-300' : ''} lg:w-48 lg:text-lg`}
+            onClick={() => handleButtonClick(index, button.display)}
+          >
+            {button.text}
+          </button>
+        ))}
       </div>
-
-      {activePanel === 'types' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[0]} />
-          <ImageContainer
-            panelImages={descriptionPanel[0].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
+      {descriptionPanel.map((panel, index) => (
+        <PanelContainer
+          key={uuidv4()}
+          className={`${index === 0 ? 'relative top-16 mb-12' : 'relative'}
+            ${
+              index % 2 === 0
+                ? 'col-start-3 col-end-11 flex-row items-center justify-center gap-12 bg-[#F2D8F5] p-20'
+                : 'grid-container col-span-full bg-gray-200 py-20 shadow-md'
+            }`}
+          panelRef={(el) => {
+            panelRefs.current[index] = el;
+          }}
+        >
+          <div
+            className={`${index % 2 !== 0 ? 'col-start-3 col-end-9 gap-4 px-20' : ''}`}
+          >
+            <h2 className='py-5 text-xl'>{panel.h2}</h2>
+            <RichTextEditor
+              editorContent={panel.descriptionParagraph as RichTextType[]}
+            />
+          </div>
+          <ImageGallery
+            images={panel.images?.data as ImageData[]}
+            breakPoints={breakPoints}
+            className='flex-col'
           />
-        </>
-      )}
-      {activePanel === 'covers' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[1]} />
-          <ImageContainer
-            panelImages={descriptionPanel[1].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'colours' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[2]} />
-          <ImageContainer
-            panelImages={descriptionPanel[2].images as ImageArrayInterface}
-            widthOffset={0}
-            heightOffset={0}
-          />
-        </>
-      )}
-      {activePanel === 'core' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[3]} />
-          <ImageContainer
-            panelImages={descriptionPanel[3].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'lead' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[4]} />
-          <ImageContainer
-            panelImages={descriptionPanel[4].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-      {activePanel === 'safety' && (
-        <>
-          <PanelContent panelInfo={descriptionPanel[5]} />
-          <ImageContainer
-            panelImages={descriptionPanel[5].images as ImageArrayInterface}
-            widthOffset={300}
-            heightOffset={300}
-          />
-        </>
-      )}
-    </div>
+        </PanelContainer>
+      ))}
+    </MainGrid>
   );
 };
 

@@ -4,19 +4,19 @@ import InstagramIcon from '../icons/InstagramIcon';
 
 const Footer = () => {
   return (
-    <footer className='flex w-full flex-row-reverse bg-rainbow-200 mt-8 py-4 pr-2 lg:p-2 lg:pr-10'>
+    <footer className='relative mt-16 flex w-full flex-row-reverse bg-rainbow-200 py-4 pr-2 lg:p-2 lg:pr-10'>
       <div className='flex items-center gap-2'>
         <FacebookIcon
           width={40}
           height={40}
           currentColor='currentColor'
-          href='/'
+          href='https://www.facebook.com/groups/coveredropes/?locale=en_GB'
         />
         <InstagramIcon
           width={50}
           height={50}
           currentColor='currentColor'
-          href='/'
+          href='https://www.instagram.com/leo.ropes/?hl=en'
         />
       </div>
     </footer>
