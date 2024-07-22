@@ -10,6 +10,8 @@ export default async function Home() {
     'api/home-page?api/populate[heroText]&populate=images'
   );
 
+  console.log({ response });
+
   const breakPoints = {
     sm: { offSet: 300 },
     lg: { breakPoint: 1025, offSet: 50 },

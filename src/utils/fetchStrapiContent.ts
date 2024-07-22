@@ -6,7 +6,7 @@ export async function fetchStrapiContent(endPoint: string) {
       next: { revalidate: 0 },
     });
     const data = await res.json();
-    return data ? data : [];
+    return data;
   } catch (error) {
     console.error(error);
   }

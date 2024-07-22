@@ -8,6 +8,11 @@ const nextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'leo-ropes-space.ams3.digitaloceanspaces.com',
+        pathname: '/uploads/**',
+      },
     ],
   },
 };
