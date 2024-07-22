@@ -1,6 +1,5 @@
 // Components
 import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
-import ImageContainer from '@/components/panels/ImageContainer';
 import RichTextEditor from '@/components/RichTextEditor';
 import MainGrid from '@/components/layout/MainGrid';
 import {
@@ -12,12 +11,6 @@ const AboutPage = async () => {
   const response: SinglePageResponse = await fetchStrapiContent(
     'api/prices-page?api/populate[headerText]&populate=image'
   );
-
-  const breakPoints = {
-    sm: { offSet: 0 },
-    lg: { breakPoint: 1025, offSet: 0 },
-    xl: { breakPoint: 1440, offSet: 400 },
-  };
 
   const data: SinglePageAttributes = response.data.attributes;
 
