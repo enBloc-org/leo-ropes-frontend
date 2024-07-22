@@ -42,10 +42,9 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
       <div className='relative rounded-lg' style={getStyle()}>
         <Image
           src={
-            apiUrl +
-            (largeScreenBreakpoint
+            largeScreenBreakpoint
               ? image.attributes.formats.medium.url
-              : image.attributes.formats.small.url)
+              : image.attributes.formats.small.url
           }
           fill={true}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw'
