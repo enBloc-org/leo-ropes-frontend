@@ -1,4 +1,4 @@
-import { ListItemType, TextChildType } from '@/types/infoPageTypes';
+import { ListItemType } from '@/types/richTextEditorTypes';
 import { v4 as uuidv4 } from 'uuid';
 
 interface UnorderedListProps {
