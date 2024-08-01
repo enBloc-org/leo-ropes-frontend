@@ -1,19 +1,18 @@
-import { HomePageAttributes, HomePageResponse } from '@/types/homePageTypes';
-import ImageContainer from '@/components/panels/ImageContainer';
-import {
-  BlocksRenderer,
-  type BlocksContent,
-} from '@strapi/blocks-react-renderer';
-import MainGrid from '@/components/layout/MainGrid';
 import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
+import { HomePageAttributes, HomePageResponse } from '@/types/homePageTypes';
+import { type BlocksContent } from '@strapi/blocks-react-renderer';
 import Link from 'next/link';
 
+//Components
+import ImageContainer from '@/components/panels/ImageContainer';
+import MainGrid from '@/components/layout/MainGrid';
+import BlocksRendererClient from '@/components/layout/BlocksRendererClient';
+
 export default async function Home() {
-  const response = await fetchStrapiContent(
+  const response: HomePageResponse = await fetchStrapiContent(
     'api/home-page?api/populate[heroText]&populate=images'
   );
   const data: HomePageAttributes = response.data.attributes;
-  const blocksContent: BlocksContent = response.data.attributes.heroText;
 
   const breakPoints = {
     sm: { offSet: 300 },
@@ -47,7 +46,9 @@ export default async function Home() {
         className='col-span-full mt-10 flex flex-col items-center justify-around px-6
         sm:px-12 md:col-start-3 md:col-end-11 lg:col-start-7 lg:col-end-12 lg:mt-8 lg:pb-20 lg:text-lg '
       >
-        <BlocksRenderer content={blocksContent} />
+        <BlocksRendererClient
+          content={response.data.attributes.heroText as BlocksContent}
+        />{' '}
         <p className='mt-6 text-center font-semibold'>{data.tagLine}</p>
         <div className='my-10 flex items-center justify-center gap-4'>
           <Link

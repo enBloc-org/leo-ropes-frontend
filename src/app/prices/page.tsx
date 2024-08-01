@@ -1,11 +1,13 @@
-// Components
+import { type BlocksContent } from '@strapi/blocks-react-renderer';
 import { fetchStrapiContent } from '@/utils/fetchStrapiContent';
-import RichTextEditor from '@/components/RichTextEditor';
-import MainGrid from '@/components/layout/MainGrid';
 import {
   SinglePageResponse,
   SinglePageAttributes,
 } from '@/types/singlePageTypes';
+
+// Components
+import BlocksRendererClient  from '@/components/layout/BlocksRendererClient';
+import MainGrid from '@/components/layout/MainGrid';
 
 const AboutPage = async () => {
   const response: SinglePageResponse = await fetchStrapiContent(
@@ -26,7 +28,9 @@ const AboutPage = async () => {
         className='col-span-full flex flex-col px-6
         sm:px-12 md:col-start-4 md:col-end-10 md:px-0 lg:mt-8 lg:pb-20 lg:text-lg'
       >
-        <RichTextEditor editorContent={data.descriptionParagraph} />
+        <BlocksRendererClient
+          content={data.descriptionParagraph as BlocksContent}
+        />
       </div>
     </MainGrid>
   );

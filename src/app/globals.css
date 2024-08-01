@@ -21,7 +21,7 @@ link {
 br {
   content: '';
   display: block;
-  margin: 1rem 0;
+  margin: .5rem 0;
 }
 
 li {
