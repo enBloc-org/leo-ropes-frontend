@@ -37,14 +37,21 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
       };
     }
   };
+
+  const getImageUrl = (format: 'medium' | 'small') => {
+    const imageUrl = image.attributes.formats[format].url;
+    if (process.env.NODE_ENV === 'development') {
+      return `${apiUrl}${imageUrl}`;
+    }
+    return imageUrl;
+  };
+
   return (
     <>
       <div className='relative rounded-lg' style={getStyle()}>
         <Image
           src={
-            largeScreenBreakpoint
-              ? image.attributes.formats.medium.url
-              : image.attributes.formats.small.url
+            largeScreenBreakpoint ? getImageUrl('medium') : getImageUrl('small')
           }
           fill={true}
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw'

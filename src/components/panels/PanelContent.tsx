@@ -1,15 +1,14 @@
 'use client';
 import useMediaQuery from '@/hooks/useMediaQuery';
-import { v4 as uuidv4 } from 'uuid';
 import { Dispatch, SetStateAction } from 'react';
+import { type BlocksContent } from '@strapi/blocks-react-renderer';
 
 //Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
 import { DisplayType } from '@/types/componentTypes';
-import { RichTextType } from '@/types/richTextEditorTypes';
 import { ImageData } from '@/types/imageTypes';
-import RichTextEditor from '../RichTextEditor';
 import ImageGallery from '../ImageGallery';
+import BlocksRendererClient from '../layout/BlocksRendererClient';
 
 interface RopeTypesPanelProps {
   panelInfo: DescriptionPanelType;
@@ -58,8 +57,8 @@ const PanelContent: React.FC<RopeTypesPanelProps> = ({
       )}
       <div className={className}>
         <h2 className='mb-4 text-xl'>{panelInfo.h2}</h2>
-        <RichTextEditor
-          editorContent={panelInfo.descriptionParagraph as RichTextType[]}
+        <BlocksRendererClient
+          content={panelInfo.descriptionParagraph as BlocksContent}
         />
       </div>
       <ImageGallery
