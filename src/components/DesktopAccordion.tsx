@@ -1,14 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from '@strapi/blocks-react-renderer';
 
 // Components
 import { DescriptionPanelType } from '@/types/infoPageTypes';
 import { ButtonListType, DisplayType } from '@/types/componentTypes';
 import { ImageData } from '@/types/imageTypes';
-import { RichTextType } from '@/types/richTextEditorTypes';
 import PanelContainer from './panels/PanelContainer';
 import MainGrid from './layout/MainGrid';
-import RichTextEditor from './RichTextEditor';
 import ImageGallery from './ImageGallery';
 
 interface DesktopAccordionProps {
@@ -71,9 +73,7 @@ const DesktopAccordion: React.FC<DesktopAccordionProps> = ({
             className={`${index % 2 !== 0 ? 'col-start-3 col-end-9 gap-4 px-20' : ''}`}
           >
             <h2 className='py-5 text-xl'>{panel.h2}</h2>
-            <RichTextEditor
-              editorContent={panel.descriptionParagraph as RichTextType[]}
-            />
+            <BlocksRenderer content={panel.descriptionParagraph as BlocksContent} />
           </div>
           <ImageGallery
             images={panel.images?.data as ImageData[]}
