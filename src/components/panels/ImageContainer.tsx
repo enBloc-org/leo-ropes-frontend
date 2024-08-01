@@ -40,7 +40,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
 
   const getImageUrl = (format: 'medium' | 'small') => {
     const imageUrl = image.attributes.formats[format].url;
-    if (imageUrl.startsWith('/')) {
+    if (process.env.NODE_ENV === 'development') {
       return `${apiUrl}${imageUrl}`;
     }
     return imageUrl;
